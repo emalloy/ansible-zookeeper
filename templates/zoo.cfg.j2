@@ -13,11 +13,20 @@ autopurge.snapRetainCount={{ zookeeper_autopurge_snapRetainCount }}
 {% for server in zookeeper_hosts %}
 {% if server.host is defined %}
 {% if server.ip is defined %}
-server.{{server.id}}={{server.ip}}:{{zookeeper_cluster_ports}}
+server.{{server.id}}={{server.ip}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
 {% else %}
-server.{{server.id}}={{server.host}}:{{zookeeper_cluster_ports}}
 {% endif %}
 {% else %}
-server.{{loop.index}}={{server}}:{{zookeeper_cluster_ports}}
+server.{{server.id}}={{server.host}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
+{% else %}
+{% endif %}
+{% endif %}
+{% else %}
+server.{{loop.index}}={{server}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
+{% else %}
+{% endif %}
 {% endif %}
 {% endfor %}
+{% if zk_role == 'observer' %}
+peerType=observer
+{% endif %}
