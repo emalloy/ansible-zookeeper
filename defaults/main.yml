@@ -37,6 +37,9 @@ zookeeper_hosts_hostname: "{{inventory_hostname}}"
 zookeeper_hosts:
   - host: "{{zookeeper_hosts_hostname}}" # the machine running
     id: 1
+    ipaddr: 127.0.0.1
+    role: voter
+zk_role: voter
 
 # Dict of ENV settings to be written into the (optional) conf/zookeeper-env.sh
 zookeeper_env: {}
