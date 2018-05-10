@@ -15,15 +15,19 @@ autopurge.snapRetainCount={{ zookeeper_autopurge_snapRetainCount }}
 {% if server.ip is defined %}
 server.{{server.id}}={{server.ip}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
 {% else %}
+
 {% endif %}
 {% else %}
+
 server.{{server.id}}={{server.host}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
 {% else %}
+
 {% endif %}
 {% endif %}
 {% else %}
 server.{{loop.index}}={{server}}:{{zookeeper_cluster_ports}}{% if server.role == 'observer' %}:observer
 {% else %}
+
 {% endif %}
 {% endif %}
 {% endfor %}
